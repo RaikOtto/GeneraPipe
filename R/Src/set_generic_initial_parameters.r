@@ -15,7 +15,7 @@ dir.create( paste( output_path, "Output", sep = "/"), showWarnings = F )
 cel_files_path = sub( x = cel_files_path, "/$", "")
 cpdb_file                   = "CPDB_pathways_genes.tab"
 tissue_norm_exprs_file      = "GSE1133-GPL96_series_matrix.txt"
-tissue_norm_exprs_file_path = paste( pipeline_loc , paste( "Misc" ,tissue_norm_exprs_file, sep ="/" ) , sep ="/" )
+tissue_norm_exprs_file_path = paste( pipeline_loc , paste("Misc", tissue_norm_exprs_file, sep = "/" ), sep = "/")
 quality_report_path         = paste( output_path, "Output/QC_report" , sep = "/" )
 results_file_path           = paste( output_path, "Output", paste( "Results", project_name, sep ="_"), sep = "/" )
 name_res_file               = paste( results_file_path, paste( "dif_exp_results", "csv", sep ="."), sep = "/" )
@@ -25,7 +25,7 @@ absent_gene_file_path       = paste( cel_files_path, absent_genes_file, sep ="/"
 tissue_abbundance_res_file  = paste( cel_files_path, "Tissue_abundance_results.csv", sep ="/" )
 kegg_file_path              = paste( cel_files_path , kegg_file, sep ="/")
 cpdb_file_path              = paste( pipeline_loc , paste( "Misc" ,cpdb_file, sep ="/" ) , sep ="/" )
-c2.all.v5_gsea_file_path    = paste( cel_files_path, "c2.all.v5.0.symbols.gmt.txt", sep = "/")
+c2.all.v5_gsea_file_path    = paste( cel_files_path, "c2.all.v5.1.symbols.gmt", sep = "/")
 time_series_res_file_path   = paste( cel_files_path, time_series_res_file, sep ="/")
 entities_of_interest_path   = paste( results_file_path, "Entities_of_interest", sep ="/")
 genes_of_interest_file_path = paste( entities_of_interest_path, genes_of_interest_file, sep ="/") 
@@ -107,7 +107,7 @@ if ( chip_type == "hgu133plus2" ){
 
 # polishing
 
-cel_files_path = sub( x = cel_files_path, pattern = "~", replacement = user_folder  )
+cel_files_path = sub( x = cel_files_path, pattern = "~", replacement = u)ser_folder  )
 kegg_file_path = sub( x = kegg_file_path, pattern = "~", replacement = user_folder  )
 cohorts_file_path = sub( x = cohorts_file_path, pattern = "~", replacement = user_folder  )
 quality_report_path = sub( x = quality_report_path, pattern = "//", replacement = "/")
