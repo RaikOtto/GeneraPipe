@@ -4,18 +4,10 @@ Version: 0.0.0.9000
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 Depends:
-    R (>= 3.2.1)
-License: What license is it under?
-LazyData: true
-RoxygenNote: 5.0.1
-Imports: affy,
+    R (>= 3.2.1),
     oligo,
-    oligoClasses,
     affyPLM,
-    Biobase,
     stringr,
-    hgu133plus2.db,
-    hgu133a.db,
     dplyr,
     limma,
     genefilter,
@@ -23,5 +15,13 @@ Imports: affy,
     pathview,
     biomaRt,
     gdata,
-    KEGG.db,
+    KEGG.db
+License: What license is it under?
+LazyData: true
+RoxygenNote: 5.0.1
+Imports: affy,
+    oligoClasses,
+    Biobase,
+    hgu133plus2.db,
+    hgu133a.db,
     devtools
