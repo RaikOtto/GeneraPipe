@@ -80,7 +80,7 @@ start_analysis = function(
   
   # extract interesting entities
   message(paste("Computing results for interesting entities, exporting results to ", env$entities_of_interest_path, ".", sep = "."))
-  #GeneraPipe::extract_intr_entities( eset, chip_type )
+  GeneraPipe::extract_intr_entities( eset, chip_type )
   
   # create heatmaps
   if (env$create_heatmaps_genes_of_interest){
