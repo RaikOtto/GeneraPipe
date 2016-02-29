@@ -44,8 +44,8 @@ result_preparation = function( eset, topall, chip_type, lfc_exp ){
     index_probes = match(rownames(topall), rownames(eset), nomatch = 0)
     exprs_case   = rowMeans(exprs(eset)[index_probes, env$index_case])
     exprs_ctrl   = rowMeans(exprs(eset)[index_probes, env$index_ctrl])
-    hgnc_ids     = stringr::str_trim(unlist(lapply(topall$geneassignment, FUN = GeneraPipe::split_fun, 2)))
-    hgnc_names   = stringr::str_trim(unlist(lapply(topall$geneassignment, FUN = GeneraPipe::split_fun, 3)))
+    hgnc_ids     = stringr::str_trim(unlist(lapply(topall$geneassignment, FUN = GeneraPipe:::split_fun, 2)))
+    hgnc_names   = stringr::str_trim(unlist(lapply(topall$geneassignment, FUN = GeneraPipe:::split_fun, 3)))
 
     topall_res = data.frame(
       "logFC"               = round(topall$logFC, 2),

@@ -204,10 +204,10 @@ GSEA <- function(
     dataset <- input.ds
   } else {
     if (regexpr(pattern=".gct", input.ds) == -1) {
-      dataset <- GeneraPipe::GSEA.Res2Frame(filename = input.ds)
+      dataset <- GeneraPipe:::GSEA.Res2Frame(filename = input.ds)
     } else {
       #         dataset <- GSEA.Gct2Frame(filename = input.ds)
-      dataset <- GeneraPipe::GSEA.Gct2Frame2(filename = input.ds)
+      dataset <- GeneraPipe:::GSEA.Gct2Frame2(filename = input.ds)
     }
   }
   gene.labels <- row.names(dataset)
@@ -220,12 +220,12 @@ GSEA <- function(
   # preproc.type control the type of pre-processing: threshold, variation filter, normalization
   
   if (preproc.type == 1) {  # Column normalize (Z-score)
-    A <- GeneraPipe::GSEA.NormalizeCols(A)
+    A <- GeneraPipe:::GSEA.NormalizeCols(A)
   } else if (preproc.type == 2) { # Column (rank) and row (Z-score) normalize 
     for (j in 1:cols) {  # column rank normalization
       A[,j] <- rank(A[,j])
     }
-    A <- GeneraPipe::GSEA.NormalizeRows(A)
+    A <- GeneraPipe:::GSEA.NormalizeRows(A)
   } else if (preproc.type == 3) { # Column (rank) norm.
     for (j in 1:cols) {  # column rank normalization
       A[,j] <- rank(A[,j])
@@ -237,7 +237,7 @@ GSEA <- function(
   if(is.list(input.cls)) {
     CLS <- input.cls
   } else {
-    CLS <- GeneraPipe::GSEA.ReadClsFile(file=input.cls)
+    CLS <- GeneraPipe:::GSEA.ReadClsFile(file=input.cls)
   }
   class.labels <- CLS$class.v
   class.phen <- CLS$phen
@@ -410,7 +410,7 @@ GSEA <- function(
     
     print(paste("Computing ranked list for actual and permuted phenotypes.......permutations: ", n.starts[nk], "--", n.ends[nk], sep=" "))
     
-    O <- GeneraPipe::GSEA.GeneRanking(A, class.labels, gene.labels, call.nperm, permutation.type = perm.type, sigma.correction = "GeneCluster", fraction=fraction, replace=replace, reverse.sign = reverse.sign)
+    O <- GeneraPipe:::GSEA.GeneRanking(A, class.labels, gene.labels, call.nperm, permutation.type = perm.type, sigma.correction = "GeneCluster", fraction=fraction, replace=replace, reverse.sign = reverse.sign)
     gc()
     
     order.matrix[,n.starts[nk]:n.ends[nk]] <- O$order.matrix
@@ -442,7 +442,7 @@ GSEA <- function(
     gene.set2 <- vector(length=length(gene.set), mode = "numeric")
     gene.set2 <- match(gene.set, gene.labels)
     if (OLD.GSEA == F) {
-      GSEA.results <- GeneraPipe::GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector = obs.s2n)
+      GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector = obs.s2n)
     } else {
       GSEA.results <- OLD.GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2)
     }
@@ -475,9 +475,9 @@ GSEA <- function(
       for (r in 1:nperm) {
         gene.list2 <- order.matrix[,r]
         if (use.fast.enrichment.routine == F) {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=correl.matrix[, r])   
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=correl.matrix[, r])   
         } else {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore2(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=correl.matrix[, r])   
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore2(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=correl.matrix[, r])   
         }
         phi[i, r] <- GSEA.results$ES
       }
@@ -485,18 +485,18 @@ GSEA <- function(
         for (r in 1:nperm) {
           obs.gene.list2 <- obs.order.matrix[,r]
           if (use.fast.enrichment.routine == F) {
-            GSEA.results <- GeneraPipe::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r]) 
+            GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r]) 
           } else {
-            GSEA.results <- GeneraPipe::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])
+            GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])
           }
           obs.phi[i, r] <- GSEA.results$ES
         }
       } else { # if no resampling then compute only one column (and fill the others with the same value)
         obs.gene.list2 <- obs.order.matrix[,1]
         if (use.fast.enrichment.routine == F) {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r]) 
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r]) 
         } else {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])
         }
         obs.phi[i, 1] <- GSEA.results$ES
         for (r in 2:nperm) {
@@ -514,9 +514,9 @@ GSEA <- function(
       for (r in 1:nperm) {
         reshuffled.gene.labels <- sample(1:rows)
         if (use.fast.enrichment.routine == F) {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore(gene.list=reshuffled.gene.labels, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.s2n)   
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore(gene.list=reshuffled.gene.labels, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.s2n)   
         } else {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore2(gene.list=reshuffled.gene.labels, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.s2n)   
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore2(gene.list=reshuffled.gene.labels, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.s2n)   
         }
         phi[i, r] <- GSEA.results$ES
       }
@@ -524,18 +524,18 @@ GSEA <- function(
         for (r in 1:nperm) {
           obs.gene.list2 <- obs.order.matrix[,r]
           if (use.fast.enrichment.routine == F) {
-            GSEA.results <- GeneraPipe::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
+            GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
           } else {
-            GSEA.results <- GeneraPipe::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
+            GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
           }
           obs.phi[i, r] <- GSEA.results$ES
         }
       } else { # if no resampling then compute only one column (and fill the others with the same value)
         obs.gene.list2 <- obs.order.matrix[,1]
         if (use.fast.enrichment.routine == F) {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
         } else {
-          GSEA.results <- GeneraPipe::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
+          GSEA.results <- GeneraPipe:::GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])   
         }
         obs.phi[i, 1] <- GSEA.results$ES
         for (r in 2:nperm) {
@@ -1075,7 +1075,7 @@ GSEA <- function(
     } 
     rm(B)
     #png( paste( output.directory, "Heatmap.png", sep = "/" ), width = 800, height = 800, res = 150  )
-    GeneraPipe::GSEA.HeatMapPlot(V = C, col.labels = class.labels, col.classes = class.phen, main = "Heat Map for Genes in Dataset")
+    GeneraPipe:::GSEA.HeatMapPlot(V = C, col.labels = class.labels, col.classes = class.phen, main = "Heat Map for Genes in Dataset")
     #dev.off()
     
     # p-vals plot

@@ -21,13 +21,13 @@ create_pathway_maps = function( topall_res, eset, volc_all, chip_type, package_p
       print("Pathway map creation error: topall_res$HGNC_symb does no exist")
       quit()
     }
-    hgnc_symbols = stringr::str_trim(unlist(lapply(volc_all$geneassignment, FUN = GeneraPipe::split_fun, 2)))
-    hgnc_names   = stringr::str_trim(unlist(lapply(volc_all$geneassignment, FUN = GeneraPipe::split_fun, 3)))
+    hgnc_symbols = stringr::str_trim(unlist(lapply(volc_all$geneassignment, FUN = GeneraPipe:::split_fun, 2)))
+    hgnc_names   = stringr::str_trim(unlist(lapply(volc_all$geneassignment, FUN = GeneraPipe:::split_fun, 3)))
 
   } else{ 
     # note: check if this works for affy 
-    hgnc_symbols = stringr::str_trim(unlist(lapply(fData(eset)$geneassignment, FUN = GeneraPipe::split_fun, 2)))
-    hgnc_names   = stringr::str_trim(unlist(lapply(fData(eset)$geneassignment, FUN = GeneraPipe::split_fun, 3)))  
+    hgnc_symbols = stringr::str_trim(unlist(lapply(fData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 2)))
+    hgnc_names   = stringr::str_trim(unlist(lapply(fData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 3)))  
   }
 
   ensembl     = biomaRt::useMart("ensembl", dataset = "hsapiens_gene_ensembl")

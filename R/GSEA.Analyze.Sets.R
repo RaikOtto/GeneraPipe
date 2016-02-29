@@ -126,7 +126,7 @@ GSEA.Analyze.Sets <- function(
   names(D.phen1) <- all.leading.genes
   row.names(D.phen1) <- set.table.phen1[1:max.sets.phen1, 2]
   output <- paste(directory, paste( doc.string, ".leading.genes.", phen1, ".gct", sep=""), sep = "/" )
-  GeneraPipe::GSEA.write.gct(D.phen1, filename=output)
+  GeneraPipe:::GSEA.write.gct(D.phen1, filename=output)
   
   # Save leading subsets as a single gene set in a .gmt file
   
@@ -155,7 +155,7 @@ GSEA.Analyze.Sets <- function(
   }
   
   cmap <-  c("#AAAAFF", "#111166")
-  GeneraPipe::GSEA.HeatMapPlot2(V = data.matrix(D.phen1), row.names = row.names(D.phen1), col.names = names(D.phen1), main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
+  GeneraPipe:::GSEA.HeatMapPlot2(V = data.matrix(D.phen1), row.names = row.names(D.phen1), col.names = names(D.phen1), main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
   
   if (non.interactive.run == F) {  
     if (.Platform$OS.type == "windows") {
@@ -222,7 +222,7 @@ GSEA.Analyze.Sets <- function(
     }
   }
   
-  GeneraPipe::GSEA.ConsPlot(Itable, col.names = set.table.phen2[1:max.sets.phen2, 2], main = " ", sub=paste("Leading Subsets Overlap ", doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ")
+  GeneraPipe:::GSEA.ConsPlot(Itable, col.names = set.table.phen2[1:max.sets.phen2, 2], main = " ", sub=paste("Leading Subsets Overlap ", doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ")
   
   if (non.interactive.run == F) {  
     if (.Platform$OS.type == "windows") {
@@ -240,7 +240,7 @@ GSEA.Analyze.Sets <- function(
   names(D.phen2) <- all.leading.genes
   row.names(D.phen2) <- set.table.phen2[1:max.sets.phen2, 2]
   output <- paste(directory, paste( doc.string, ".leading.genes.", phen2, ".gct", sep=""), sep = "/")
-  GeneraPipe::GSEA.write.gct(D.phen2, filename=output)
+  GeneraPipe:::GSEA.write.gct(D.phen2, filename=output)
   
   # Save primary subsets as a single gene set in a .gmt file
   
@@ -269,7 +269,7 @@ GSEA.Analyze.Sets <- function(
   }
   
   cmap <-  c("#AAAAFF", "#111166")
-  GeneraPipe::GSEA.HeatMapPlot2(V = data.matrix(D.phen2), row.names = row.names(D.phen2), col.names = names(D.phen2), main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
+  GeneraPipe:::GSEA.HeatMapPlot2(V = data.matrix(D.phen2), row.names = row.names(D.phen2), col.names = names(D.phen2), main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
   
   if (non.interactive.run == F) {  
     if (.Platform$OS.type == "windows") {
@@ -347,7 +347,7 @@ GSEA.Analyze.Sets <- function(
   cmap <-  c("#AAAAFF", "#111166")
   #   GSEA.HeatMapPlot2(V = A, row.names = A.row.names, col.names = A.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
   
-  GeneraPipe::GSEA.HeatMapPlot2(V = t(A), row.names = A.names, col.names = A.row.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
+  GeneraPipe:::GSEA.HeatMapPlot2(V = t(A), row.names = A.names, col.names = A.row.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
   
   text.filename <- paste(directory, paste( doc.string, ".leading.assignment.clustered.", phen1, ".txt", sep=""), sep = "/", collapse="")
   line.list <- c("Gene", A.row.names)
@@ -424,7 +424,7 @@ GSEA.Analyze.Sets <- function(
   cmap <-  c("#AAAAFF", "#111166")
   
   #   GSEA.HeatMapPlot2(V = A, row.names = A.row.names, col.names = A.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
-  GeneraPipe::GSEA.HeatMapPlot2(V = t(A), row.names =A.names , col.names = A.row.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
+  GeneraPipe:::GSEA.HeatMapPlot2(V = t(A), row.names =A.names , col.names = A.row.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
   
   text.filename <- paste(directory, paste( doc.string, ".leading.assignment.clustered.", phen2, ".txt", sep=""), sep = "/", collapse="")
   line.list <- c("Gene", A.row.names)

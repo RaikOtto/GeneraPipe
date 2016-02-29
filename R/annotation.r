@@ -62,15 +62,15 @@ annotate = function( eset, chip_type, phenodata ){
   } else if ( chip_type %in% c( "pd.hugene.2.0.st") ){
   
     featureData(eset) = getNetAffx(eset, type = "transcript" )
-    env$hgnc_symbols        = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe::split_fun, 2 ) ) )
+    env$hgnc_symbols        = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 2 ) ) )
     env$hgnc_genes          = env$hgnc_symbols
-    env$hgnc_names          = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe::split_fun, 3 ) ) )
-    env$ensembl_genes       = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe::split_fun, 1 ) ) )
+    env$hgnc_names          = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 3 ) ) )
+    env$ensembl_genes       = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 1 ) ) )
   
   } else if ( chip_type %in% c( "pd.huex.1.0.st.v2" ) ){  
   
     featureData(eset)      = oligo::getNetAffx(eset, type = "transcript")
-    env$hgnc_symbols = stringr::str_trim( unlist( lapply( featureData( eset )$geneassignment, FUN = GeneraPipe::split_fun, 2 ) ) )
+    env$hgnc_symbols = stringr::str_trim( unlist( lapply( featureData( eset )$geneassignment, FUN = GeneraPipe:::split_fun, 2 ) ) )
     env$hgnc_genes          = env$hgnc_symbols
     
   } else {

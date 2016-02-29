@@ -57,14 +57,14 @@ set_initial_parameters = function( cel_files_path, output_path, database_path, p
   env$user_folder                 = as.character( system("echo $HOME", intern = T) )
   cohorts_file_path                       = paste( cel_files_path, cohorts_file, sep ="/" )
   
-  if (GeneraPipe::strEndsWith( cohorts_file_path, ".csv")){  
+  if (GeneraPipe:::strEndsWith( cohorts_file_path, ".csv")){  
     phenodata = read.table( cohorts_file_path , header = TRUE , sep = "," )
   } else {  
     phenodata = read.table( cohorts_file_path , header = TRUE , sep = "\t" )
   }
   phenodata$ID = base::gsub( c(".gz|.CEL|.cel|.GZ"), "", phenodata$ID )
   
-  if (GeneraPipe::strEndsWith(env$kegg_file_path, ".csv")){  
+  if (GeneraPipe:::strEndsWith(env$kegg_file_path, ".csv")){  
     env$keggdata = read.table( env$kegg_file_path , header = TRUE , sep = "," )
   } else {  
     env$keggdata = read.table( env$kegg_file_path , header = TRUE , sep = "\t" )

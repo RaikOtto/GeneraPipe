@@ -81,7 +81,7 @@ compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_data
 
   unlink(paste(env$gsea_output_path, "*", sep = "/"))
 
-  GeneraPipe::GSEA(                                                         # Input/Output Files :-------------------------------------------
+  GeneraPipe:::GSEA(                                                         # Input/Output Files :-------------------------------------------
                                                                            input.ds              = paste(cel_files_path, "ExpressionSet.gct", sep ="/"),               # Input gene expression Affy dataset file in RES or GCT format
                                                                            input.cls             = paste(cel_files_path, "phenotypes_GSEA.cls", sep ="/"),               # Input class vector (phenotype) file in CLS format
                                                                            gs.db                 = gene_set_database_path,           # Gene set database in GMT format
@@ -112,7 +112,7 @@ compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_data
   #--------------------------------------------------------------------------------------------------------------------------------------------------
 
   # Overlap and leading gene subset assignment analysis of the GSEA results                                                                           
-  GeneraPipe::GSEA.Analyze.Sets(
+  GeneraPipe:::GSEA.Analyze.Sets(
     directory = env$gsea_output_path,        # Directory where to store output and results (default: "")
     topgs     = 20,                     # number of top scoring gene sets used for analysis
     height    = 16,
