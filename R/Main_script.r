@@ -31,28 +31,28 @@ start_analysis = function(
   
   # set default parameters
   message( "Configurating workspace, loading input data.")  
-  phenodata = GeneraPipe::set_initial_parameters(cel_files_path, output_path, database_path, project_name, cohorts_file, kegg_file, package_path)
+  phenodata = GeneraPipe:::set_initial_parameters(cel_files_path, output_path, database_path, project_name, cohorts_file, kegg_file, package_path)
   
   # read in CEL files
   message( "Reading in CEL files." )
-  raw_data = GeneraPipe::read_cel_files(cel_files_path, chip_type, zipped)
+  raw_data = GeneraPipe:::read_cel_files(cel_files_path, chip_type, zipped)
   
   # create cohorts
   message( "Creating cohorts for data.")
-  raw_data = GeneraPipe::create_cohorts( raw_data, chip_type, set_ctrl, set_case, phenodata)
+  raw_data = GeneraPipe:::create_cohorts( raw_data, chip_type, set_ctrl, set_case, phenodata)
   phenodata = env$phenodata
   
   # normalization
   message("Normalizing raw data.")
-  eset = GeneraPipe::normalize(raw_data = raw_data, chip_type = chip_type, zipped = zipped)
+  eset = GeneraPipe:::normalize(raw_data = raw_data, chip_type = chip_type, zipped = zipped)
   
   # annotation
   message("Annotating data.")
-  eset = GeneraPipe::annotate( eset, chip_type, annotate )
+  eset = GeneraPipe:::annotate( eset, chip_type, annotate )
   
   # differential expression analysis
   message("Performing differential expression analysis.")
-  topall = GeneraPipe::dif_exp_analysis( eset, chip_type, phenodata, p_val, lfc_exp )
+  topall = GeneraPipe:::dif_exp_analysis( eset, chip_type, phenodata, p_val, lfc_exp )
   eset = env$eset
   volc_all = env$volc_all
   
@@ -63,16 +63,16 @@ start_analysis = function(
   
   # compute GSEA
   if (env$use_gsea){
-    GeneraPipe::compute_gsea( cel_files_path, eset, set_case, set_ctrl, gene_set_database_path )
+    GeneraPipe:::compute_gsea( cel_files_path, eset, set_case, set_ctrl, gene_set_database_path )
   }
   
   # create pathway maps
   message(paste("Creating pathway maps, exporting results to ", env$pathway_maps_path, ".", sep = ""))
-  #GeneraPipe::create_pathway_maps( topall_res, eset, volc_all, chip_type, package_path )
+  #GeneraPipe:::create_pathway_maps( topall_res, eset, volc_all, chip_type, package_path )
   
   # extract interesting entities
   message(paste("Computing results for interesting entities, exporting results to ", env$entities_of_interest_path, ".", sep = "."))
-  GeneraPipe::extract_intr_entities( eset, chip_type )
+  GeneraPipe:::extract_intr_entities( eset, chip_type )
   
   # create heatmaps
   if (env$create_heatmaps_genes_of_interest){
@@ -81,7 +81,7 @@ start_analysis = function(
     } else{
       message(paste("Creating heatmaps for the ", env$heatmap_list_genes_count, " highest differential expressed genes.", sep = ""))
     }
-    GeneraPipe::create_heatmaps( eset, topall_res, project_name, set_ctrl, set_case )
+    GeneraPipe:::create_heatmaps( eset, topall_res, project_name, set_ctrl, set_case )
   }
   
 }
