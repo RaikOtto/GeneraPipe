@@ -1,0 +1,73 @@
+ID	Group	SubGroup	SupGroup2
+GSM721576.CEL	Benign Epithelium	Benign Normal Epithelium	Benign Epithelium
+GSM721577.CEL	Benign Epithelium	Benign Normal Epithelium	Benign Epithelium
+GSM721578.CEL	Benign Epithelium	Benign Normal Epithelium	Benign Epithelium
+GSM721579.CEL	Benign Epithelium	Benign Normal Epithelium	Benign Epithelium
+GSM721580.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721581.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721582.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721583.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721584.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721585.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721586.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721587.CEL	Benign Distal Stroma	Benign Distal Stroma	Benign Stroma
+GSM721588.CEL	Benign Tumor	Benign Tumor	Benign Tumor
+GSM721589.CEL	Benign Tumor	Benign Tumor	Benign Tumor
+GSM721590.CEL	Benign Tumor	Benign Tumor	Benign Tumor
+GSM721591.CEL	Benign Tumor	Benign Tumor	Benign Tumor
+GSM721592.CEL	Benign Tumor	Benign Tumor	Benign Tumor
+GSM721593.CEL	Benign Adjacent Stroma	Benign Adjacent Stroma	Benign Stroma
+GSM721594.CEL	Benign Adjacent Stroma	Benign Adjacent Stroma	Benign Stroma
+GSM721595.CEL	Benign Adjacent Stroma	Benign Adjacent Stroma	Benign Stroma
+GSM721596.CEL	Benign Adjacent Stroma	Benign Adjacent Stroma	Benign Stroma
+GSM721597.CEL	Benign Adjacent Stroma	Benign Adjacent Stroma	Benign Stroma
+GSM721598.CEL	Benign Adjacent Stroma	Benign Adjacent Stroma	Benign Stroma
+GSM721599.CEL	Malignant Epithelium	Malignant Normal Epithelium	Malignant Epithelium
+GSM721600.CEL	Malignant Epithelium	Malignant Normal Epithelium	Malignant Epithelium
+GSM721601.CEL	Malignant Epithelium	Malignant Normal Epithelium	Malignant Epithelium
+GSM721602.CEL	Malignant Epithelium	Malignant Normal Epithelium	Malignant Epithelium
+GSM721603.CEL	Malignant Epithelium	Malignant Normal Epithelium	Malignant Epithelium
+GSM721604.CEL	Malignant Distal Stroma	Malignant Distal Stroma	Malignant Stroma
+GSM721605.CEL	Malignant Distal Stroma	Malignant Distal Stroma	Malignant Stroma
+GSM721606.CEL	Malignant Distal Stroma	Malignant Distal Stroma	Malignant Stroma
+GSM721607.CEL	Malignant Distal Stroma	Malignant Distal Stroma	Malignant Stroma
+GSM721608.CEL	Malignant Distal Stroma	Malignant Distal Stroma	Malignant Stroma
+GSM721609.CEL	Malignant Distal Stroma	Malignant Distal Stroma	Malignant Stroma
+GSM721610.CEL	Malignant Distal Stroma	Malignant Distal Stroma	Malignant Stroma
+GSM721611.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721612.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721613.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721614.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721615.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721616.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721617.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721618.CEL	Malignant Tumor	Malignant Tumor	Malignant Tumor
+GSM721619.CEL	Malignant Adjacent Stroma	Malignant Adjacent Stroma	Malignant Stroma
+GSM721620.CEL	Malignant Adjacent Stroma	Malignant Adjacent Stroma	Malignant Stroma
+GSM721621.CEL	Malignant Adjacent Stroma	Malignant Adjacent Stroma	Malignant Stroma
+GSM721622.CEL	Malignant Adjacent Stroma	Malignant Adjacent Stroma	Malignant Stroma
+GSM721623.CEL	Malignant Adjacent Stroma	Malignant Adjacent Stroma	Malignant Stroma
+GSM721624.CEL	Malignant Adjacent Stroma	Malignant Adjacent Stroma	Malignant Stroma
+GSM721625.CEL	Malignant Adjacent Stroma	Malignant Adjacent Stroma	Malignant Stroma
+GSM721626.CEL	Misc	Replicate Normal Epithelium	Misc
+GSM721627.CEL	Misc	Replicate Distal Stroma	Misc
+GSM721628.CEL	Misc	Replicate Tumor	Misc
+GSM721629.CEL	Misc	Replicate Adjacent Stroma	Misc
+GSM721630.CEL	Misc	Replicate Normal Epithelium	Misc
+GSM721631.CEL	Misc	Replicate Distal Stroma	Misc
+GSM721632.CEL	Misc	Replicate Tumor	Misc
+GSM721633.CEL	Misc	Replicate Adjacent Stroma	Misc
+GSM721634.CEL	Failed	Failed Normal Epithelium	Failed
+GSM721635.CEL	Failed	Failed Normal Epithelium	Failed
+GSM721636.CEL	Failed	Failed Distal Stroma	Failed
+GSM721637.CEL	Failed	Failed Tumor	Failed
+GSM721638.CEL	Failed	Failed Tumor	Failed
+GSM721639.CEL	Failed	Failed Adjacent Stroma	Failed
+GSM721640.CEL	Failed	Failed Normal Epithelium	Failed
+GSM721641.CEL	Failed	Failed Normal Epithelium	Failed
+GSM721642.CEL	Failed	Failed Distal Stroma	Failed
+GSM721643.CEL	Failed	Failed Distal Stroma	Failed
+GSM721644.CEL	Failed	Failed Distal Stroma	Failed
+GSM721645.CEL	Failed	Failed Tumor	Failed
+GSM721646.CEL	Failed	Failed Adjacent Stroma	Failed
+GSM721647.CEL	Failed	Failed Adjacent Stroma	Failed
