@@ -1,8 +1,8 @@
 #' @export
 start_analysis = function(
-  cel_files_path = "", 
-  output_path = cel_files_path,
-  database_path = "~/GeneraPipe/inst/GeneraPipeDefaultDB.sqlite3",
+  cel_files_path = paste(system.file("", package = "GeneraPipe"), "extdata", sep = "/"),
+  output_path = "",
+  database_path = paste(system.file("", package = "GeneraPipe"), "GeneraPipeDefaultDB.sqlite3", sep = "/"),
   project = "GSE29156",
   gene_set_database_path = ""
   ){
@@ -41,14 +41,6 @@ start_analysis = function(
   message( "Creating cohorts for data.")
   raw_data = GeneraPipe::create_cohorts( raw_data, chip_type, set_ctrl, set_case, phenodata)
   phenodata = env$phenodata
-  
-  if (env$create_heatmaps_genes_of_interest){
-    if (env$use_kegg_for_heatmap){
-      message("Creating heatmaps for genes of interest.")
-    } else{
-      message(paste("Creating heatmaps for the ", env$heatmap_list_genes_count, " highest differential expressed genes.", sep = ""))
-    }
-  }
   
   # normalization
   message("Normalizing raw data.")
