@@ -62,13 +62,13 @@ start_analysis = function(
   eset = env$eset
   
   # compute GSEA
-  if (env$use_gsea){
-    GeneraPipe:::compute_gsea( cel_files_path, eset, set_case, set_ctrl, gene_set_database_path )
-  }
+  #if (env$use_gsea){
+  #  GeneraPipe:::compute_gsea( cel_files_path, eset, set_case, set_ctrl, gene_set_database_path )
+  #}
   
   # create pathway maps
   message(paste("Creating pathway maps, exporting results to ", env$pathway_maps_path, ".", sep = ""))
-  #GeneraPipe:::create_pathway_maps( topall_res, eset, volc_all, chip_type, package_path )
+  GeneraPipe:::create_pathway_maps( topall_res, eset, volc_all, chip_type, package_path )
   
   # extract interesting entities
   message(paste("Computing results for interesting entities, exporting results to ", env$entities_of_interest_path, ".", sep = "."))
