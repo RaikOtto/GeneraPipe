@@ -1,4 +1,4 @@
-create_heatmaps = function( eset, topall_res, project_name, set_ctrl, set_case ){
+create_heatmaps = function( eset, topall_res, project_name, set_ctrl, set_case, output_path ){
   
   if (env$create_heatmaps_genes_of_interest){
     

@@ -81,6 +81,6 @@ start_analysis = function(
     } else{
       message(paste("Creating heatmaps for the ", env$heatmap_list_genes_count, " highest differential expressed genes.", sep = ""))
     }
-    GeneraPipe:::create_heatmaps( eset, topall_res, project_name, set_ctrl, set_case )
+    GeneraPipe:::create_heatmaps( eset, topall_res, project_name, set_ctrl, set_case, output_path )
   }
 }
