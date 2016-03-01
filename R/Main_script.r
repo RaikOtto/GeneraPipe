@@ -37,6 +37,10 @@ start_analysis = function(
   message( "Reading in CEL files." )
   raw_data = GeneraPipe:::read_cel_files(cel_files_path, chip_type, zipped)
   
+  # quality control
+  message( "Performing quality control.")
+  GeneraPipe:::quality_control( eset, raw_data, phenodata )
+  
   # create cohorts
   message( "Creating cohorts for data.")
   raw_data = GeneraPipe:::create_cohorts( raw_data, chip_type, set_ctrl, set_case, phenodata)

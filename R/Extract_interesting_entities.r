@@ -9,7 +9,7 @@ extract_intr_entities = function( eset, chip_type ){
   if( chip_type == "HumanHT-12.v4" ){
     expr_data_fix = eset_select
   } else{
-    expr_data_fix  = Biobase::exprs(eset)
+    expr_data_fix  = exprs(eset)
   }
 
   exprs_case = rowMeans(expr_data_fix[, env$index_case] )
@@ -152,7 +152,7 @@ extract_intr_entities = function( eset, chip_type ){
     
     for (i in mapping){
       
-      pathway_id = as.character(cpdb_ident[i])
+      pathway_id = as.character(cpdb_ident[0])
       
       if (length(pathway_id) >= 1){
         
@@ -161,7 +161,7 @@ extract_intr_entities = function( eset, chip_type ){
         genes         = cpdb_t$hgnc_symbol_ids[i]
         gene_list     = unlist(stringr::str_split(genes, ","))
         mapping_gene  = which(as.character(hgnc_symbols) %in% as.character(gene_list))  
-        exprs_genes   = expr_data_fix[mapping_gene,]
+        exprs_genes   = expr_data_fix[mapping_gene, ]
         exprs_case    = round(rowMeans(exprs_genes[, env$index_case]), 2)
         exprs_ctrl    = round(rowMeans(exprs_genes[, env$index_ctrl]), 2)
         dif_exp       = round(exprs_case - exprs_ctrl, 2)
