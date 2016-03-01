@@ -7,7 +7,8 @@ annotate = function( eset, chip_type, phenodata ){
       message("Multiprobe annotation not implemented yet, System aborting")
       quit()
     } else {  
-      env$hgnc_genes    = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2SYMBOL); 
+      env$hgnc_genes    = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2SYMBOL);
+      env$hgnc_symbols  = env$hgnc_genes
       env$ensembl_genes = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENSEMBL); 
       env$entrez_genes  = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENTREZID); 
       env$uniprot       = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2UNIPROT); 
@@ -37,6 +38,7 @@ annotate = function( eset, chip_type, phenodata ){
     } else {
     
       env$hgnc_genes   = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aSYMBOL )
+      env$hgnc_symbols  = env$hgnc_genes
       env$entrez_genes = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aENTREZID )
       
       env$entrez_genes[is.na(entrez_genes)] = ""
@@ -59,9 +61,11 @@ annotate = function( eset, chip_type, phenodata ){
     env$go[ is.na(env$omim)  ] = ""
     env$enzyme[ is.na(env$enzyme)  ] = ""
     
+    
+    
   } else if ( chip_type %in% c( "pd.hugene.2.0.st") ){
   
-    featureData(eset) = getNetAffx(eset, type = "transcript" )
+    featureData(eset)       = getNetAffx(eset, type = "transcript" )
     env$hgnc_symbols        = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 2 ) ) )
     env$hgnc_genes          = env$hgnc_symbols
     env$hgnc_names          = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 3 ) ) )
@@ -70,8 +74,8 @@ annotate = function( eset, chip_type, phenodata ){
   } else if ( chip_type %in% c( "pd.huex.1.0.st.v2" ) ){  
   
     featureData(eset)      = oligo::getNetAffx(eset, type = "transcript")
-    env$hgnc_symbols = stringr::str_trim( unlist( lapply( featureData( eset )$geneassignment, FUN = GeneraPipe:::split_fun, 2 ) ) )
-    env$hgnc_genes          = env$hgnc_symbols
+    env$hgnc_symbols       = stringr::str_trim( unlist( lapply( featureData( eset )$geneassignment, FUN = GeneraPipe:::split_fun, 2 ) ) )
+    env$hgnc_genes         = env$hgnc_symbols
     
   } else {
   

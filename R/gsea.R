@@ -1,4 +1,3 @@
-#suppressMessages( source( "Src/GSEA.1.0.R", verbose = T, max.deparse.length = 9999 ) )
 compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_database_path ){
   
   if (! file.exists(paste(cel_files_path, "ExpressionSet.gct", sep = "/"))){
