@@ -8,7 +8,7 @@ result_preparation = function( eset, topall, chip_type, lfc_exp ){
     pathway      = as.character(BiocGenerics::mget(rownames(topall), hgu133plus2.db::hgu133plus2PATH))
 
     topall_res = data.frame(
-      "Probe_ids"           = probe_ids
+      "Probe_ids"           = probe_ids,
       "logFC"               = topall$logFC,
       "P_Value"             = topall$P.Val,
       "HGNC_symb"           = hgnc_genes,
