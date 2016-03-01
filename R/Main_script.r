@@ -58,7 +58,7 @@ start_analysis = function(
   
   # export results
   message(paste("Exporting results to ", env$results_file_path, ".", sep = ""))
-  topall_res = GeneraPipe::result_preparation( eset, topall, chip_type, lfc_exp )
+  topall_res = GeneraPipe:::result_preparation( eset, topall, chip_type, lfc_exp )
   eset = env$eset
   
   # compute GSEA
@@ -83,5 +83,4 @@ start_analysis = function(
     }
     GeneraPipe:::create_heatmaps( eset, topall_res, project_name, set_ctrl, set_case )
   }
-  
 }
