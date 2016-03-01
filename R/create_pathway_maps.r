@@ -39,8 +39,8 @@ create_pathway_maps = function( topall_res, eset, volc_all, chip_type, package_p
 
   if (chip_type == "HumanHT-12.v4"){
     probe_ids   = ncbifd$ID
-    eset_select = exprs(eset)[match(probe_ids, rownames(exprs(eset))),]
-    eset_select = eset_select[ which( !is.na( rownames(eset_select) ) ), ]
+    eset_select = exprs(eset)[match(probe_ids, rownames(exprs(eset))), ]
+    eset_select = eset_select[which( !is.na( rownames(eset_select) ) ), ]
     exprs_case  = round(rowMeans(eset_select[, env$index_case]), 2)
     exprs_ctrl  = round(rowMeans(eset_select[, env$index_ctrl]), 2)
     dif_exp     = round(exprs_case - exprs_ctrl, 2)

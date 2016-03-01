@@ -7,7 +7,7 @@ start_analysis = function(
   gene_set_database_path = ""
   ){
   
-  #cel_files_path = "~/Documents/GeneraPipe_GSE29156/Input"
+  #cel_files_path = "~/Documents/GeneraPipe_GSE14407/Input"
   #output_path = "~/Documents"
   package_path = system.file("", package = "GeneraPipe")
   #database_path = "~/GeneraPipe/inst/GeneraPipeDefaultDB.sqlite3"
