@@ -20,7 +20,7 @@ GSEA.ConsPlot <- function(V, col.names, main = " ", sub = " ", xlab=" ", ylab=" 
   
   #     max.size <- max(nchar(col.names))
   par(mar = c(5, 15, 15, 5))
-  image(1:cols, 1:cols, t(B), col = col.map, axes=FALSE, main=main, sub=sub, xlab= xlab, ylab=ylab)
+  image(1:cols, 1:cols, t(B), col = col.map, axes = FALSE, main = main, sub = sub, xlab = xlab, ylab = ylab)
   
   for (i in 1:cols) {
     col.names[i]  <- substr(col.names[i], 1, 25)
@@ -29,8 +29,8 @@ GSEA.ConsPlot <- function(V, col.names, main = " ", sub = " ", xlab=" ", ylab=" 
   
   size.col.char <- ifelse(cols < 15, 1, sqrt(15/cols))
   
-  axis(2, at=1:cols, labels=col.names2, adj= 0.5, tick=FALSE, las = 1, cex.axis=size.col.char, font.axis=1, line=-1)
-  axis(3, at=1:cols, labels=col.names, adj= 1, tick=FALSE, las = 3, cex.axis=size.col.char, font.axis=1, line=-1)
+  axis(2, at=1:cols, labels=col.names2, adj= 0.5, tick = FALSE, las = 1, cex.axis=size.col.char, font.axis = 1, line = -1)
+  axis(3, at=1:cols, labels=col.names, adj= 1, tick = FALSE, las = 3, cex.axis=size.col.char, font.axis = 1, line = -1)
   
   return()
 }

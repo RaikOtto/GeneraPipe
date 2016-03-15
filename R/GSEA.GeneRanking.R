@@ -184,7 +184,7 @@ GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.ty
   
   s2n.matrix <- M1/S1
   
-  if (reverse.sign == T) {
+  if (reverse.sign == TRUE) {
     s2n.matrix <- - s2n.matrix
   }
   gc()
@@ -236,7 +236,7 @@ GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.ty
   obs.s2n.matrix <- M1/S1
   gc()
   
-  if (reverse.sign == T) {
+  if (reverse.sign == TRUE) {
     obs.s2n.matrix <- - obs.s2n.matrix
   }
   

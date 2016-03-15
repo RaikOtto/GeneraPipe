@@ -24,4 +24,5 @@ Imports: affy,
     Biobase,
     hgu133plus2.db,
     hgu133a.db,
-    devtools
+    devtools,
+    arrayQualityMetrics
