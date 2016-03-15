@@ -42,7 +42,7 @@ setClass("paths",
     user_folder = "character",
     cohorts_file_path = "character",
     package_path = "character",
-    gene_set_db_path = "character")
+    msigdb_path = "character")
 )
 
 

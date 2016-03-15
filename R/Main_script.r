@@ -2,7 +2,7 @@
 StartAnalysis = function(
   cel_files_path,
   project,
-  gene_set_db_path,
+  msigdb_path,
   output_path = cel_files_path,
   gsea = TRUE,
   kegg_for_heatmap = TRUE
@@ -14,7 +14,7 @@ StartAnalysis = function(
   if (missing(project)){
     stop("Need to specify project identifier. Select exisitng project from database or add a new project to database before starting analysis.")
   }
-  if (missing(gene_set_db_path)){
+  if (missing(msigdb_path)){
     stop("Need to specify path to MSigDB for GSEA.")
   }
   
@@ -49,7 +49,7 @@ StartAnalysis = function(
     cohorts_file,
     kegg_file, 
     package_path,
-    gene_set_db_path)
+    msigdb_path)
 
   pheno_kegg = GeneraPipe:::read_pheno(paths)
   

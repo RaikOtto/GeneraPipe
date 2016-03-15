@@ -1,7 +1,7 @@
 compute_gsea = function(cel_files_path, results, set_ctrl, set_case, annotation, paths){
   
   gsea_output_path = paths@gsea_output_path
-  gene_set_db_path = paths@gene_set_db_path
+  msigdb_path = paths@msigdb_path
   eset       = results@eset
   index_case = results@index_case
   index_ctrl = results@index_ctrl
@@ -90,7 +90,7 @@ compute_gsea = function(cel_files_path, results, set_ctrl, set_case, annotation,
   GeneraPipe:::GSEA(                                                         # Input/Output Files :-------------------------------------------
                                                                            input.ds              = paste(cel_files_path, "ExpressionSet.gct", sep ="/"),               # Input gene expression Affy dataset file in RES or GCT format
                                                                            input.cls             = paste(cel_files_path, "phenotypes_GSEA.cls", sep ="/"),               # Input class vector (phenotype) file in CLS format
-                                                                           gs.db                 = gene_set_db_path,           # Gene set database in GMT format
+                                                                           gs.db                 = msigdb_path,           # Gene set database in GMT format
                                                                            output.directory      = gsea_output_path,            # Directory where to store output and results (default: "")
                                                                            #  Program parameters :----------------------------------------------------------------------------------------------------------------------------
                                                                            doc.string            = "Benign_Stroma_vs_Malignant_Stroma",     # Documentation string used as a prefix to name result files (default: "GSEA.analysis")
