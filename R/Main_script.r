@@ -118,7 +118,7 @@ StartAnalysis = function(
   if (project == "GSE29156"){
     destfile = "~/Output_GeneraPipe/c2.all.v5.1.symbols.gmt"
     download.file("https://raw.githubusercontent.com/janniklas93/GeneraPipeTest/master/c2.all.v5.1.symbols.gmt", destfile, method = "auto")
-    results@msigdb_path = destfile
+    paths@msigdb_path = destfile
   }
   if (gsea){
     GeneraPipe:::compute_gsea(
