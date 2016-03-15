@@ -1,14 +1,21 @@
-compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_database_path ){
+compute_gsea = function(cel_files_path, results, set_ctrl, set_case, annotation, paths){
+  
+  gsea_output_path = paths@gsea_output_path
+  gene_set_db_path = paths@gene_set_db_path
+  eset       = results@eset
+  index_case = results@index_case
+  index_ctrl = results@index_ctrl
+  hgnc_symbols = annotation@hgnc_symbols
   
   if (! file.exists(paste(cel_files_path, "ExpressionSet.gct", sep = "/"))){
     message("Creating ExpressionSet.gct file for GSEA.")
-    probe_ids = env$hgnc_symbols
+    probe_ids = hgnc_symbols
     descr = rep("NA", length( probe_ids))
     data = as.data.frame(exprs(eset))
     expression_out = data.frame("NAMES" = probe_ids, "DESCRIPTION" = descr, data)
   
-    index_case_gsea = sapply(env$index_case, function(x) x + 2)
-    index_ctrl_gsea = sapply(env$index_ctrl, function(x) x + 2)
+    index_case_gsea = sapply(index_case, function(x) x + 2)
+    index_ctrl_gsea = sapply(index_ctrl, function(x) x + 2)
   
     expression_out = expression_out[expression_out$NAMES != "", ]
     names_dupli = expression_out$NAMES[which( duplicated( expression_out$NAMES))]
@@ -52,7 +59,7 @@ compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_data
   if (! file.exists(paste(cel_files_path, "phenotypes_GSEA.cls", sep = "/"))){
     message( "Creating phenotypes_GSEA.cls file for GSEA." )
     if(! exists("expression_out")){
-      probe_ids = env$hgnc_symbols
+      probe_ids = hgnc_symbols
       descr = rep("NA", length( probe_ids))
       data = as.data.frame(exprs(eset))
       expression_out = data.frame("NAMES" = probe_ids, "DESCRIPTION" = descr, data)
@@ -63,8 +70,8 @@ compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_data
     case_GSEA = case_GSEA[1]
     ctrl_GSEA = unlist(strsplit(set_ctrl, " "))
     ctrl_GSEA = ctrl_GSEA[1]
-    phenoLabels[env$index_case] = case_GSEA
-    phenoLabels[env$index_ctrl] = ctrl_GSEA
+    phenoLabels[index_case] = case_GSEA
+    phenoLabels[index_ctrl] = ctrl_GSEA
     phenoLabels = paste(phenoLabels, collapse = " ")
     if (phenoLabels[1] == set_case){
       pheno_order = paste("#", case_GSEA, ctrl_GSEA, sep = " ")
@@ -78,13 +85,13 @@ compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_data
     message(paste("There already exists phenotypes_GSEA.cls file in ", cel_files_path, ".", " Using this for GSEA.", sep = ""))
   }
 
-  unlink(paste(env$gsea_output_path, "*", sep = "/"))
+  unlink(paste(gsea_output_path, "*", sep = "/"))
 
   GeneraPipe:::GSEA(                                                         # Input/Output Files :-------------------------------------------
                                                                            input.ds              = paste(cel_files_path, "ExpressionSet.gct", sep ="/"),               # Input gene expression Affy dataset file in RES or GCT format
                                                                            input.cls             = paste(cel_files_path, "phenotypes_GSEA.cls", sep ="/"),               # Input class vector (phenotype) file in CLS format
-                                                                           gs.db                 = gene_set_database_path,           # Gene set database in GMT format
-                                                                           output.directory      = env$gsea_output_path,            # Directory where to store output and results (default: "")
+                                                                           gs.db                 = gene_set_db_path,           # Gene set database in GMT format
+                                                                           output.directory      = gsea_output_path,            # Directory where to store output and results (default: "")
                                                                            #  Program parameters :----------------------------------------------------------------------------------------------------------------------------
                                                                            doc.string            = "Benign_Stroma_vs_Malignant_Stroma",     # Documentation string used as a prefix to name result files (default: "GSEA.analysis")
                                                                            non.interactive.run   = F,               # Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
@@ -112,7 +119,7 @@ compute_gsea = function( cel_files_path, eset, set_case, set_ctrl, gene_set_data
 
   # Overlap and leading gene subset assignment analysis of the GSEA results                                                                           
   GeneraPipe:::GSEA.Analyze.Sets(
-    directory = env$gsea_output_path,        # Directory where to store output and results (default: "")
+    directory = gsea_output_path,        # Directory where to store output and results (default: "")
     topgs     = 20,                     # number of top scoring gene sets used for analysis
     height    = 16,
     width     = 16

@@ -12,8 +12,8 @@ GSEA.NormalizeCols <- function(V) {
   # whatsoever. Neither the Broad Institute nor MIT can be responsible for
   # its use, misuse, or functionality.
   
-  col.mean <- apply(V, MARGIN=2, FUN=mean)
-  col.sd <- apply(V, MARGIN=2, FUN=sd)
+  col.mean <- apply(V, MARGIN = 2, FUN=mean)
+  col.sd <- apply(V, MARGIN = 2, FUN=sd)
   col.n <- length(V[1,])
   for (i in 1:col.n) {
     if (col.sd[i] == 0) {

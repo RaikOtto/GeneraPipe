@@ -27,7 +27,7 @@ GSEA.EnrichmentScore <- function(gene.list, gene.set, weighted.score.type = 1, c
   # whatsoever. Neither the Broad Institute nor MIT can be responsible for
   # its use, misuse, or functionality.
   
-  tag.indicator <- sign(match(gene.list, gene.set, nomatch=0))    # notice that the sign is 0 (no tag) or 1 (tag) 
+  tag.indicator <- sign(match(gene.list, gene.set, nomatch = 0))    # notice that the sign is 0 (no tag) or 1 (tag) 
   no.tag.indicator <- 1 - tag.indicator 
   N <- length(gene.list) 
   Nh <- length(gene.set) 

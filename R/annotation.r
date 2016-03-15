@@ -1,99 +1,73 @@
-annotate = function( eset, chip_type, phenodata ){
+annotate = function(results, chip_type, phenodata){
+  
+  eset = results@eset
 
-  if ( chip_type == "hgu133plus2" ){
+  ### unify all imported ids and check wheather all are necessary in downstream workflow
   
-    if ( env$multi_probe ){   
-      ### yet to be done
-      message("Multiprobe annotation not implemented yet, System aborting")
-      quit()
-    } else {  
-      env$hgnc_genes    = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2SYMBOL);
-      env$hgnc_symbols  = env$hgnc_genes
-      env$ensembl_genes = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENSEMBL); 
-      env$entrez_genes  = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENTREZID); 
-      env$uniprot       = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2UNIPROT); 
-      env$go            = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2GO); 
-      env$omim          = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2OMIM); 
-      env$enzyme        = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENZYME); 
+  if ( chip_type == "hgu133plus2" ){  
+    hgnc_genes    = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2SYMBOL);
+    hgnc_symbols  = hgnc_genes
+    hgnc_names    = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2GENENAME)
+    ensembl_genes = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENSEMBL); 
+    entrez_genes  = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENTREZID); 
+    uniprot       = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2UNIPROT); 
+    go            = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2GO); 
+    omim          = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2OMIM); 
+    enzyme        = BiocGenerics::mget(rownames(eset), hgu133plus2.db::hgu133plus2ENZYME); 
       
-      env$hgnc_genes[ is.na(env$hgnc_genes)  ] = ""
-      env$ensembl_genes[ is.na(env$ensembl_genes)  ] = ""
-      env$entrez_genes[ is.na(env$entrez_genes)  ] = ""
-      env$uniprot[ is.na(env$uniprot)  ] = ""
-      env$go[ is.na(env$go)  ] = ""
-      env$go[ is.na(env$omim)  ] = ""
-      env$enzyme[ is.na(env$enzyme)  ] = ""
-    }
+    hgnc_genes[is.na(hgnc_genes)] = ""
+    hgnc_names[is.na(hgnc_names)] = ""
+    ensembl_genes[is.na(ensembl_genes)] = ""
+    entrez_genes[is.na(entrez_genes)] = ""
+    uniprot[is.na(uniprot)] = ""
+    go[is.na(go)] = ""
+    go[is.na(omim)] = ""
+    enzyme[is.na(enzyme)] = ""
   
-  } else if ( chip_type == "hgu133a" ){
+  } else if ( chip_type == "hgu133a" ){ 
+    hgnc_genes    = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aSYMBOL)
+    hgnc_symbols  = hgnc_genes
+    entrez_genes  = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aENTREZID)
+    ensembl_genes = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aENSEMBL)
+    hgnc_names    = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aGENENAME)
+    uniprot       = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aUNIPROT)
+    pathway       = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aPATH)
+    go            = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aGO)
+    omim          = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aOMIM)
+    enzyme        = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aENZYME)
   
-    if ( multi_probe ){
+    entrez_genes[is.na(entrez_genes)] = ""
+    hgnc_genes[is.na(hgnc_genes)] = ""
+    ensembl_genes[is.na(ensembl_genes)  ] = ""
+    hgnc_names[is.na(hgnc_names)  ] = ""
+    uniprot[ is.na(uniprot)  ] = ""
+    uniprot[ is.na(pathway)  ] = ""
+    go[ is.na(go)  ] = ""
+    go[ is.na(omim)  ] = ""
+    enzyme[ is.na(enzyme)  ] = ""
     
-      mapWithMultiProbes_entrez  = AnnotationDbi::toggleProbes(hgu133a.db::hgu133aENTREZID, "all")
-      mapWithMultiProbes_symbols = AnnotationDbi::toggleProbes(hgu133a.db::hgu133aSYMBOL, "all")
-    
-      env$hgnc_genes   = BiocGenerics::mget(rownames(eset), mapWithMultiProbes_symbols)
-      env$entrez_genes = BiocGenerics::mget(rownames(eset), mapWithMultiProbes_entrez)
-    
-    } else {
-    
-      env$hgnc_genes   = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aSYMBOL )
-      env$hgnc_symbols  = env$hgnc_genes
-      env$entrez_genes = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aENTREZID )
-      
-      env$entrez_genes[is.na(entrez_genes)] = ""
-      env$hgnc_genes[is.na(hgnc_genes)] = ""
-    }  
+  } else if (chip_type %in% c("pd.hugene.2.0.st")){
+    featureData(eset)   = getNetAffx(eset, type = "transcript" )
+    hgnc_symbols        = stringr::str_trim(unlist(lapply(featureData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 2)))
+    hgnc_genes          = hgnc_symbols
+    hgnc_names          = stringr::str_trim(unlist(lapply(featureData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 3)))
+    ensembl_genes       = stringr::str_trim(unlist(lapply(featureData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 1)))
   
-    env$ensembl_genes = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aENSEMBL)
-    env$hgnc_names    = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aGENENAME)
-    env$uniprot       = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aUNIPROT)
-    env$pathway       = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aPATH)
-    env$go            = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aGO)
-    env$omim          = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aOMIM)
-    env$enzyme        = BiocGenerics::mget(rownames(eset), hgu133a.db::hgu133aENZYME)
-  
-    env$ensembl_genes[ is.na(env$ensembl_genes)  ] = ""
-    env$hgnc_genes[ is.na(env$hgnc_names)  ] = ""
-    env$uniprot[ is.na(env$uniprot)  ] = ""
-    env$uniprot[ is.na(env$pathway)  ] = ""
-    env$go[ is.na(env$go)  ] = ""
-    env$go[ is.na(env$omim)  ] = ""
-    env$enzyme[ is.na(env$enzyme)  ] = ""
-    
-    
-    
-  } else if ( chip_type %in% c( "pd.hugene.2.0.st") ){
-  
-    featureData(eset)       = getNetAffx(eset, type = "transcript" )
-    env$hgnc_symbols        = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 2 ) ) )
-    env$hgnc_genes          = env$hgnc_symbols
-    env$hgnc_names          = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 3 ) ) )
-    env$ensembl_genes       = stringr::str_trim( unlist( lapply( featureData( eset  )$geneassignment, FUN = GeneraPipe:::split_fun, 1 ) ) )
-  
-  } else if ( chip_type %in% c( "pd.huex.1.0.st.v2" ) ){  
-  
-    featureData(eset)      = oligo::getNetAffx(eset, type = "transcript")
-    env$hgnc_symbols       = stringr::str_trim( unlist( lapply( featureData( eset )$geneassignment, FUN = GeneraPipe:::split_fun, 2 ) ) )
-    env$hgnc_genes         = env$hgnc_symbols
+  } else if (chip_type %in% c("pd.huex.1.0.st.v2")){  
+    featureData(eset)   = oligo::getNetAffx(eset, type = "transcript")
+    hgnc_symbols        = stringr::str_trim(unlist(lapply(featureData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 2)))
+    hgnc_genes          = hgnc_symbols
+    hgnc_names          = stringr::str_trim(unlist(lapply(featureData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 3)))
+    ensembl_genes       = stringr::str_trim(unlist(lapply(featureData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 1)))
     
   } else {
-  
     message("Unknown Chip Type")
     stop()
   }
-
-  if (env$integrate_drug_data){
-    index_drug = match(drug_type, colnames(phenodata), nomatch = 0)
-    if (index_drug == 0){
-    
-      message("Could not find drug in cohorts file")
-      quit()
-    }
-    mapping = match(names(env$cohorts_vec), phenodata$ID, nomatch = 0)
-    drug_data = phenodata[mapping  ,index_drug]
-    names(drug_data) = names(env$cohorts_vec)
-  }
   
-  return(eset)
+  new("annotation",
+    hgnc_genes = hgnc_genes,
+    hgnc_symbols = hgnc_symbols,
+    hgnc_names = hgnc_names,
+    ensembl_genes = ensembl_genes)
 }

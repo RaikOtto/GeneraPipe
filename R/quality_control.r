@@ -1,7 +1,7 @@
 #suppressMessages(library("arrayQualityMetrics"))
 quality_control = function( eset, raw_data, phenodata ){
 
-  if (! (quality_control_only)){
+  if (! (env$quality_control_only)){
   
     mapping = match(colnames(eset), phenodata$ID)
   
@@ -14,7 +14,7 @@ quality_control = function( eset, raw_data, phenodata ){
         colnames(pData(eset))[length(colnames(pData(eset)))] = elem
       }
     }
-    pData(eset)$Cohort = cohorts_vec[match(rownames(pData(eset)), names(env$cohorts_vec) ) ]
+    pData(eset)$Cohort = env$cohorts_vec[match(rownames(pData(eset)), names(env$cohorts_vec) ) ]
   
   } else {
   
@@ -25,6 +25,7 @@ quality_control = function( eset, raw_data, phenodata ){
   pData(raw_data) = pData(eset)
 
   message( "Running Quality Metrics"  )
-  arrayQualityMetrics( raw_data, intgroup = "Cohort", outdir = env$quality_report_path, force = TRUE, showWarnings = FALSE)
+  arrayQualityMetrics::arrayQualityMetrics( raw_data, intgroup = c("Cohort", "Group"), outdir = env$quality_report_path, force = TRUE, showWarnings = FALSE)
+  #arrayQualityMetrics::arrayQualityMetrics( raw_data, outdir = env$quality_report_path, force = TRUE, showWarnings = FALSE)
   #arrayQualityMetrics( raw_data, force = T)
 }

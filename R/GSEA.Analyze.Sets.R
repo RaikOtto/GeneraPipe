@@ -1,7 +1,7 @@
 GSEA.Analyze.Sets <- function(
   directory,
   topgs = "",
-  non.interactive.run = F,
+  non.interactive.run = FALSE,
   height = 12,
   width = 17) {
   
@@ -76,7 +76,7 @@ GSEA.Analyze.Sets <- function(
   max.genes <- length(all.leading.genes)
   M <- matrix(0, nrow=max.sets.phen1, ncol=max.genes)
   for (i in 1:max.sets.phen1) {
-    M[i,] <- sign(match(all.leading.genes, as.vector(leading.lists[[i]]), nomatch=0))   # notice that the sign is 0 (no tag) or 1 (tag) 
+    M[i,] <- sign(match(all.leading.genes, as.vector(leading.lists[[i]]), nomatch = 0))   # notice that the sign is 0 (no tag) or 1 (tag) 
   }
   
   Inter <- matrix(0, nrow=max.sets.phen1, ncol=max.sets.phen1)
@@ -90,7 +90,7 @@ GSEA.Analyze.Sets <- function(
   names(Itable) <- set.table.phen1[1:max.sets.phen1, 2]
   row.names(Itable) <- set.table.phen1[1:max.sets.phen1, 2]
   
-  if (non.interactive.run == F) {
+  if (non.interactive.run == FALSE) {
     if (.Platform$OS.type == "windows") {
       filename <- paste(directory, paste( doc.string, ".leading.overlap.", phen1, sep="" ), sep ="/", collapse="")
       windows(height = width, width = width)
@@ -110,7 +110,7 @@ GSEA.Analyze.Sets <- function(
   
   GSEA.ConsPlot(Itable, col.names = set.table.phen1[1:max.sets.phen1, 2], main = " ", sub=paste("Leading Subsets Overlap ", doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ")
   
-  if (non.interactive.run == F) {  
+  if (non.interactive.run == FALSE) {  
     if (.Platform$OS.type == "windows") {
       savePlot(filename = filename, type ="jpeg", device = dev.cur())
     } else if (.Platform$OS.type == "unix") {
@@ -136,7 +136,7 @@ GSEA.Analyze.Sets <- function(
   output <- paste(directory, paste( doc.string, ".all.leading.genes.", phen1, ".gmt", sep=""), sep = "/" )
   write(noquote(output.line), file = output, ncolumns = length(output.line))
   
-  if (non.interactive.run == F) {
+  if (non.interactive.run == FALSE) {
     if (.Platform$OS.type == "windows") {
       filename <- paste(directory, paste( doc.string, ".leading.assignment.", phen1, sep=""), sep = "/", collapse="")
       windows(height = height, width = width)
@@ -157,7 +157,7 @@ GSEA.Analyze.Sets <- function(
   cmap <-  c("#AAAAFF", "#111166")
   GeneraPipe:::GSEA.HeatMapPlot2(V = data.matrix(D.phen1), row.names = row.names(D.phen1), col.names = names(D.phen1), main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
   
-  if (non.interactive.run == F) {  
+  if (non.interactive.run == FALSE) {  
     if (.Platform$OS.type == "windows") {
       savePlot(filename = filename, type ="jpeg", device = dev.cur())
     } else if (.Platform$OS.type == "unix") {
@@ -204,7 +204,7 @@ GSEA.Analyze.Sets <- function(
   names(Itable) <- set.table.phen2[1:max.sets.phen2, 2]
   row.names(Itable) <- set.table.phen2[1:max.sets.phen2, 2]
   
-  if (non.interactive.run == F) {
+  if (non.interactive.run == FALSE) {
     if (.Platform$OS.type == "windows") {
       filename <- paste(directory, paste( doc.string, ".leading.overlap.", phen2, sep=""), sep = "/", collapse="")
       windows(height = width, width = width)
@@ -224,7 +224,7 @@ GSEA.Analyze.Sets <- function(
   
   GeneraPipe:::GSEA.ConsPlot(Itable, col.names = set.table.phen2[1:max.sets.phen2, 2], main = " ", sub=paste("Leading Subsets Overlap ", doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ")
   
-  if (non.interactive.run == F) {  
+  if (non.interactive.run == FALSE) {  
     if (.Platform$OS.type == "windows") {
       savePlot(filename = filename, type ="jpeg", device = dev.cur())
     } else if (.Platform$OS.type == "unix") {
@@ -250,7 +250,7 @@ GSEA.Analyze.Sets <- function(
   output <- paste(directory, paste( doc.string, ".all.leading.genes.", phen2, ".gmt", sep=""), sep = "/" )
   write(noquote(output.line), file = output, ncolumns = length(output.line))
   
-  if (non.interactive.run == F) {
+  if (non.interactive.run == FALSE) {
     if (.Platform$OS.type == "windows") {
       filename <- paste(directory, paste( doc.string, ".leading.assignment.", phen2, sep=""),sep ="/", collapse="")
       windows(height = height, width = width)
@@ -271,7 +271,7 @@ GSEA.Analyze.Sets <- function(
   cmap <-  c("#AAAAFF", "#111166")
   GeneraPipe:::GSEA.HeatMapPlot2(V = data.matrix(D.phen2), row.names = row.names(D.phen2), col.names = names(D.phen2), main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
   
-  if (non.interactive.run == F) {  
+  if (non.interactive.run == FALSE) {  
     if (.Platform$OS.type == "windows") {
       savePlot(filename = filename, type ="jpeg", device = dev.cur())
     } else if (.Platform$OS.type == "unix") {
@@ -324,7 +324,7 @@ GSEA.Analyze.Sets <- function(
   A <- A[HC$order,]
   A.row.names <- A.row.names[HC$order]
   
-  if (non.interactive.run == F) {
+  if (non.interactive.run == FALSE) {
     if (.Platform$OS.type == "windows") {
       filename <- paste(directory, paste( doc.string, ".leading.assignment.clustered.", phen1, sep=""), sep = "/", collapse="")
       windows(height = height, width = width)
@@ -354,9 +354,9 @@ GSEA.Analyze.Sets <- function(
   line.header <- paste(line.list, collapse="\t")
   line.length <- length(A.row.names) + 1
   write(line.header, file = text.filename, ncolumns = line.length)
-  write.table(t(A), file=text.filename, append = T, quote=F, col.names= F, row.names=T, sep = "\t")
+  write.table(t(A), file=text.filename, append = TRUE, quote = FALSE, col.names= FALSE, row.names = TRUE, sep = "\t")
   
-  if (non.interactive.run == F) {  
+  if (non.interactive.run == FALSE) {  
     if (.Platform$OS.type == "windows") {
       savePlot(filename = filename, type ="jpeg", device = dev.cur())
     } else if (.Platform$OS.type == "unix") {
@@ -403,7 +403,7 @@ GSEA.Analyze.Sets <- function(
   A <- A[HC$order,]
   A.row.names <- A.row.names[HC$order]
   
-  if (non.interactive.run == F) {
+  if (non.interactive.run == FALSE) {
     if (.Platform$OS.type == "windows") {
       filename <- paste(directory, paste( doc.string, ".leading.assignment.clustered.", phen2, sep=""), sep = "/", collapse="")
       windows(height = height, width = width)
@@ -433,7 +433,7 @@ GSEA.Analyze.Sets <- function(
   write(line.header, file = text.filename, ncolumns = line.length)
   write.table(t(A), file=text.filename, append = T, quote=F, col.names= F, row.names=T, sep = "\t")
   
-  if (non.interactive.run == F) {  
+  if (non.interactive.run == FALSE) {  
     if (.Platform$OS.type == "windows") {
       savePlot(filename = filename, type ="jpeg", device = dev.cur())
     } else if (.Platform$OS.type == "unix") {
