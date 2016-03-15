@@ -19,10 +19,10 @@ StartAnalysis = function(
   }
   
   if (project == "GSE29156"){
-    cel_files_path = paste(system.file("", package = "GeneraPipe"), "inst/extdata/" , sep = "")
+    cel_files_path = paste(system.file("", package = "GeneraPipe"), "extdata/" , sep = "")
   }
   
-  database_path = paste(system.file("", package = "GeneraPipe"), "inst/GeneraPipeDefaultDB.sqlite3", sep = "")
+  database_path = paste(system.file("", package = "GeneraPipe"), "GeneraPipeDefaultDB.sqlite3", sep = "")
   package_path = system.file("", package = "GeneraPipe")
   
   message( paste( "Running GeneraPipe with project ", project, ".", sep = "" ) )
