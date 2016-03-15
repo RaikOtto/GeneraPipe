@@ -18,7 +18,11 @@ StartAnalysis = function(
     stop("Need to specify path to MSigDB for GSEA.")
   }
   
-  database_path = paste(system.file("", package = "GeneraPipe"), "GeneraPipeDefaultDB.sqlite3", sep = "/")
+  if (project == "GSE29156"){
+    cel_files_path = paste(system.file("", package = "GeneraPipe"), "inst/extdata/" , sep = "")
+  }
+  
+  database_path = paste(system.file("", package = "GeneraPipe"), "inst/GeneraPipeDefaultDB.sqlite3", sep = "")
   package_path = system.file("", package = "GeneraPipe")
   
   message( paste( "Running GeneraPipe with project ", project, ".", sep = "" ) )
@@ -108,9 +112,14 @@ StartAnalysis = function(
     results,
     annotation,
     chip_type,
-    lfc_exp )
+    lfc_exp)
   
   # Compute GSEA ----------------------------------------------------
+  if (project == "GSE29156"){
+    destfile = "~/Output_GeneraPipe/c2.all.v5.1.symbols.gmt"
+    download.file("https://raw.githubusercontent.com/janniklas93/GeneraPipeTest/master/c2.all.v5.1.symbols.gmt", destfile, method = "auto")
+    results@msigdb_path = destfile
+  }
   if (gsea){
     GeneraPipe:::compute_gsea(
       cel_files_path,
