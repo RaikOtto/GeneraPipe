@@ -25,4 +25,5 @@ Imports: affy,
     hgu133plus2.db,
     hgu133a.db,
     devtools,
-    arrayQualityMetrics
+    arrayQualityMetrics,
+    pd.huex.1.0.st.v2
