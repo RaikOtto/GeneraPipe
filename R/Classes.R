@@ -45,10 +45,11 @@ setClass("paths",
     msigdb_path = "character")
 )
 
-
+setClassUnion("AffyBatchORExonFeatureSet", c("AffyBatch", "ExonFeatureSet"))
 setClass("results",
   representation(
-    raw_data = "ExonFeatureSet",
+    raw_data = "AffyBatchORExonFeatureSet",
+    #raw_data = "ExonFeatureSet",
     eset = "ExpressionSet",
     topall = "data.frame",
     volc_all = "data.frame",
