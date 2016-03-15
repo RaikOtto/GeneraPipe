@@ -18,18 +18,6 @@ normalize = function(results, chip_type, zipped){
     message(c("Unknown Chip Type: ", chip_type))
     stop()
   }
-
-  #### check if this can be removed ----
-  #if (! env$quality_control_only){
-  #  if (! zipped ){
-  #    eset = eset[, match(base::gsub(c(".gz|.CEL|.cel|.GZ"), "", names(env$cohorts_vec) ), base::gsub( c(".gz|.CEL|.cel|.GZ"), "", colnames(eset) ), nomatch = 0 ) ] # development
-  #  } else {
-  #    eset = eset[, match(base::gsub(c(".gz|.CEL|.cel|.GZ"), "", names(env$cohorts_vec) ), base::gsub( c(".gz|.CEL|.cel|.GZ"), "", colnames(eset) ), nomatch = 0 ) ] # development
-  #  }
-  #} else {
-  #  eset = eset
-  #}
-  #### ----------------------------------
   
   # unify the names
   rownames(pData(eset)) = base::gsub(c(".gz|.CEL|.cel|.GZ"), "", rownames(pData(eset))) 
@@ -38,32 +26,6 @@ normalize = function(results, chip_type, zipped){
 
   eset = eset[, rownames(pData(eset)) %in% base::gsub( c(".gz|.CEL|.cel|.GZ"), "", names(cohorts_vec))]
   pData(eset)$Cohort = cohorts_vec[mapping_cohort_p]
-
-
-  #if( env$export_eset ){
-
-  #  print("Exporting eset data")
-  #  source("Src/annotation.r")
-
-  #  expressionSet_out = data.frame(
-   #   "Exprs" = as.character(exprs(eset)),
-  #    "HGNC" = hgnc_genes
-  #  )
-
-   # expressionSet_out = expressionSet_out[ expressionSet_out$HGNC!=""  ,]
-
-    #write.table(
-     # expressionSet_out,
-     # file = paste(
-    #    output_path,
-    #    paste0(
-    #      paste0
-    #      ("Output/ExpressionSet_",
-     #      project_name),".txt"
-      #  ),
-       # sep = "/"),
-    #  sep = "\t", row.names = F, quote = F)
-  #}
   
   results@eset = eset
   results
