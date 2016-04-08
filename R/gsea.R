@@ -7,13 +7,13 @@ compute_gsea = function(cel_files_path, results, set_ctrl, set_case, annotation,
   index_ctrl = results@index_ctrl
   hgnc_symbols = annotation@hgnc_symbols
   
+  probe_ids = unlist(hgnc_symbols)
+  descr = rep("NA", length( probe_ids))
+  data = as.data.frame(exprs(eset))
+  expression_out = data.frame("NAMES" = probe_ids, "DESCRIPTION" = descr, data)
+  
   if (! file.exists(paste(cel_files_path, "ExpressionSet.gct", sep = "/"))){
     message("Creating ExpressionSet.gct file for GSEA.")
-    probe_ids = hgnc_symbols
-    descr = rep("NA", length( probe_ids))
-    data = as.data.frame(exprs(eset))
-    expression_out = data.frame("NAMES" = probe_ids, "DESCRIPTION" = descr, data)
-  
     index_case_gsea = sapply(index_case, function(x) x + 2)
     index_ctrl_gsea = sapply(index_ctrl, function(x) x + 2)
   
@@ -124,5 +124,4 @@ compute_gsea = function(cel_files_path, results, set_ctrl, set_case, annotation,
     height    = 16,
     width     = 16
   )
-  
 }

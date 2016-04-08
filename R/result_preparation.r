@@ -25,7 +25,6 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
       "P_Value"             = topall$P.Val,
       "HGNC_symb"           = hgnc_genes,
       "HGNC_name"           = stringr::str_replace_all(hgnc_names,",",";"),
-      "ensembl"             = ensembl_genes,
       "pathway"             = pathway
     )
     topall_res = topall_res[order(topall_res$logFC, decreasing = TRUE), ]
@@ -47,7 +46,6 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
       "P_Value"             = topall$P.Val,
       "HGNC_symb"           = hgnc_genes,
       "HGNC_name"           = stringr::str_replace_all(hgnc_names,",",";"),
-      "ensembl"             = ensembl_genes,
       "pathway"             = pathway
     )
     topall_res = topall_res[order(topall_res$logFC, decreasing = TRUE),]
