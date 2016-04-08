@@ -9,7 +9,7 @@ read_cel_files = function(cel_files_path, chip_type, zipped){
   
   } else if (chip_type %in% c("pd.huex.1.0.st.v2", "pd.hugene.2.0.st")){
     celFiles = oligoClasses::list.celfiles( cel_files_path, full = TRUE, listGzipped = zipped)
-    raw_data = affy::read.celfiles(filenames = celFiles)
+    raw_data = oligo::read.celfiles(filenames = celFiles)
     
     #results = new("results",
         #raw_data2 = raw_data)

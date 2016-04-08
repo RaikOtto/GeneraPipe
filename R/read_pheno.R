@@ -4,9 +4,9 @@ read_pheno = function(paths){
   kegg_file_path    = paths@kegg_file_path
   
   if (GeneraPipe:::strEndsWith(cohorts_file_path, ".csv")){  
-    phenodata = read.table( cohorts_file_path , header = TRUE , sep = ",")
+    phenodata = read.table(cohorts_file_path , header = TRUE , sep = ",")
   } else {  
-    phenodata = read.table( cohorts_file_path , header = TRUE , sep = "\t" )
+    phenodata = read.table(cohorts_file_path , header = TRUE , sep = "\t" )
   }
   phenodata$ID = base::gsub(c(".gz|.CEL|.cel|.GZ"), "", phenodata$ID)
   

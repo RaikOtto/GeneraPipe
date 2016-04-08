@@ -1,4 +1,4 @@
-create_cohorts = function( results, chip_type, set_ctrl, set_case, pheno_kegg, stat_design){
+create_cohorts = function(results, chip_type, set_ctrl, set_case, pheno_kegg, stat_design){
   
   raw_data = results@raw_data
   phenodata = pheno_kegg$pheno
