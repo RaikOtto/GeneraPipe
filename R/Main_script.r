@@ -5,7 +5,8 @@ StartAnalysis = function(
   msigdb_path,
   output_path = cel_files_path,
   gsea = TRUE,
-  kegg_for_heatmap = TRUE
+  kegg_for_heatmap = TRUE,
+  normalize
   ){
   
   if (missing(cel_files_path)){
@@ -17,15 +18,18 @@ StartAnalysis = function(
   if (missing(msigdb_path)){
     stop("Need to specify path to MSigDB for GSEA.")
   }
+  if (missing(normalize)){
+    normalize = c("GCRMA", "quantile", "median.polish")
+  }
   
   if (project == "GSE29156"){
-    cel_files_path = paste(system.file("", package = "GeneraPipe"), "extdata/" , sep = "")
+    cel_files_path = paste(system.file("", package = "GeneraPipe"), "extdata/" , sep = "/")
   }
   
   database_path = paste(system.file("", package = "GeneraPipe"), "GeneraPipeDefaultDB.sqlite3", sep = "/")
   package_path = system.file("", package = "GeneraPipe")
   
-  message( paste( "Running GeneraPipe with project ", project, ".", sep = "" ) )
+  message(paste("Running GeneraPipe with project ", project, ".", sep = ""))
   #load project parameters
   project_para = data.frame(dplyr::filter(dplyr::tbl(dplyr::src_sqlite(database_path), "projects"), ID == project))
   
@@ -42,6 +46,9 @@ StartAnalysis = function(
   zipped       = as.logical(project_para$zipped)
   stat_design  = "contrast"
   heatmap_list_genes_count = 40
+  if(! dir.exists(output_path)){
+    dir.create(output_path)
+  }
   
   # Set default parameters -----------------------------------------
   message("Configurating workspace, loading input data.")  
@@ -79,7 +86,8 @@ StartAnalysis = function(
   results = GeneraPipe:::normalize(
     results,
     chip_type,
-    zipped)
+    zipped,
+    normalize)
   
   # Quality control -------------------------------------------------
   #message("Performing quality control.")

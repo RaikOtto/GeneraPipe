@@ -33,7 +33,7 @@ create_cohorts = function(results, chip_type, set_ctrl, set_case, pheno_kegg, st
   index_case = as.integer(which(design[, colnames(design) == "CASE"] == 1))
 
   
-  if(! ("Cohort" %in% colnames(Biobase::pData(raw_data))) & chip_type != "HumanHT-12.v4") {
+  if(! ("Cohort" %in% colnames(Biobase::pData(raw_data)))) {
     raw_data_group_vec                     = rep("", dim(Biobase::pData(raw_data))[1])
     raw_data_group_vec[index_ctrl]     = "CTRL"
     raw_data_group_vec[index_case]     = "CASE"

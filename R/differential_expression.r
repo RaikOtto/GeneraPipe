@@ -4,10 +4,6 @@ dif_exp_analysis = function(results, chip_type, pheno_kegg, p_val, lfc_exp, stat
   design = results@design
   phenodata = pheno_kegg$pheno
   
-  if (chip_type %in% c("hgu133plus2", "hgu133a")){
-    eset = eset[! gdata::startsWith(rownames(eset), "AFFX-"),]
-  }
-
   eset = eset[, which(colnames(eset) %in% phenodata$ID)]
   index = which(colnames(phenodata) == "Group")
   pData(eset)$Group = phenodata[match(colnames(eset), phenodata$ID, nomatch = 0), index]
@@ -33,6 +29,7 @@ dif_exp_analysis = function(results, chip_type, pheno_kegg, p_val, lfc_exp, stat
   }
 
   topall = limma::topTable(fit, coef = "contrast", number  = nrow(eset), adjust  = "none", p.value = p_val, lfc = lfc_exp)
+  index_topall = match(row.names(topall), row.names(eset))
 
   if ((dim(topall)[1] == 0) & (dim(topall)[2] == 0)){
     stop("Topall has dimension zero")
@@ -47,8 +44,9 @@ dif_exp_analysis = function(results, chip_type, pheno_kegg, p_val, lfc_exp, stat
   message(c("Amount probes higher in Case cohort: ", sum(topall$logFC >= lfc_exp)))
   message(c("Amount probes lower in Case cohort: ", sum(topall$logFC < lfc_exp)))
   
-  results@eset     = eset
-  results@volc_all = volc_all
-  results@topall   = topall
+  results@eset         = eset
+  results@volc_all     = volc_all
+  results@topall       = topall
+  results@index_topall = index_topall
   results
 }

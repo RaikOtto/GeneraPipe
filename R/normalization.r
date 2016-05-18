@@ -1,16 +1,16 @@
-normalize = function(results, chip_type, zipped){
+normalize = function(results, chip_type, zipped, normalize){
   
   raw_data = results@raw_data
   cohorts_vec = results@cohorts_vec
   
-  if (chip_type %in% c("hgu133a", "hgu133plus2")){
-    eset = affyPLM::threestep(raw_data, background.method = "GCRMA", normalize.method = "quantile", summary.method = "median.polish")
+  if (chip_type %in% c("hgu133a", "hgu133plus2", "drosophila2")){
+    eset = affyPLM::threestep(raw_data, background.method = normalize[1], normalize.method = normalize[2], summary.method = normalize[3])
 
   } else if (chip_type %in% c("pd.huex.1.0.st.v2")){
     eset = oligo::rma(raw_data, target = 'extended', normalize = TRUE)
     Biobase::featureData(eset) = oligo::getNetAffx(eset, 'transcript')
 
-  } else if ( chip_type %in% c( "pd.hugene.2.0.st" ) ){
+  } else if ( chip_type %in% c("pd.hugene.2.0.st") ){
     eset = oligo::rma(raw_data, target = "core", normalize = TRUE)
     Biobase::featureData(eset) = oligo::getNetAffx(eset, 'transcript')
 

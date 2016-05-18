@@ -57,7 +57,8 @@ setClass("results",
     cohorts_vec = "character",
     design = "matrix",
     index_case = "integer",
-    index_ctrl = "integer")
+    index_ctrl = "integer",
+    index_topall = "integer")
 )
 
 setClass("annotation",

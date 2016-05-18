@@ -2,10 +2,10 @@ annotate = function(results, chip_type, phenodata){
   
   eset = results@eset
   
-  if (chip_type %in% c("hgu133plus2", "hgu133a")){
-    eset = eset[! gdata::startsWith(rownames(eset), "AFFX-"),]
-  }
-
+  #if (chip_type %in% c("hgu133plus2", "hgu133a", "drosophila2")){
+  #  eset = eset[! gdata::startsWith(rownames(eset), "AFFX-"),]
+  #}
+  
   ### unify all imported ids and check wheather all are necessary in downstream workflow
   
   if (chip_type == "hgu133plus2"){  
@@ -50,6 +50,27 @@ annotate = function(results, chip_type, phenodata){
     go[ is.na(omim)  ] = ""
     enzyme[ is.na(enzyme)  ] = ""
     
+  } else if (chip_type %in% c("drosophila2")){
+    
+    hgnc_genes    = mget(rownames(eset), drosophila2SYMBOL);
+    hgnc_symbols  = hgnc_genes
+    entrez_genes  = mget(rownames(eset), drosophila2ENTREZID); 
+    ensembl_genes = mget(rownames(eset), drosophila2ENSEMBL);
+    hgnc_names    = mget(rownames(eset), drosophila2GENENAME);
+    uniprot       = mget(rownames(eset), drosophila2UNIPROT);
+    pathway       = mget(rownames(eset), drosophila2PATH);
+    go            = mget(rownames(eset), drosophila2GO);
+    enzyme        = mget(rownames(eset), drosophila2ENZYME); 
+ 
+    hgnc_genes[is.na(hgnc_genes)] = ""
+    entrez_genes[is.na(entrez_genes)] = ""
+    ensembl_genes[is.na(ensembl_genes)] = ""
+    hgnc_names[is.na(hgnc_names)] = ""
+    uniprot[is.na(uniprot)] = ""
+    uniprot[is.na(pathway)] = ""
+    go[is.na(go)] = ""
+    enzyme[ is.na(enzyme)  ] = ""
+  
   } else if (chip_type %in% c("pd.hugene.2.0.st")){
     featureData(eset)   = getNetAffx(eset, type = "transcript" )
     hgnc_symbols        = stringr::str_trim(unlist(lapply(featureData(eset)$geneassignment, FUN = GeneraPipe:::split_fun, 2)))
