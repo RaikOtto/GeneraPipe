@@ -50,7 +50,7 @@ if (length(args) < 5) {
 
 if (length(args) == 5){
   normalize = c("GCRMA", "quantile", "median.polish")
-  message("Running GeneraPipe with default parameters for expression measure calculation"
+  message("Running GeneraPipe with default parameters for expression measure calculation")
 }
 
 if (length(args) == 6){
