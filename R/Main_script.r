@@ -138,38 +138,37 @@ StartAnalysis = function(
       paths)
   }
   
-  # Create pathway maps ---------------------------------------------
-  message(paste("Creating pathway maps, exporting results to ", paths@pathway_maps_path, ".", sep = ""))
-  GeneraPipe:::create_pathway_maps(
-    results, 
-    chip_type, 
-    paths,
-    annotation,
-    pheno_kegg)
+  ## Create pathway maps ---------------------------------------------
+  #message(paste("Creating pathway maps, exporting results to ", paths@pathway_maps_path, ".", sep = ""))
+  #GeneraPipe:::create_pathway_maps(
+  #  results, 
+  #  chip_type, 
+  #  paths,
+  #  annotation,
+  #  pheno_kegg)
   
   # Extract interesting entities ------------------------------------
-  message(paste("Computing results for interesting entities, exporting results to ", paths@entities_of_interest_path, ".", sep = "."))
-  GeneraPipe:::extract_intr_entities(
-    results,
-    paths,
-    pheno_kegg,
-    chip_type,
-    annotation)
+  #message(paste("Computing results for interesting entities, exporting results to ", paths@entities_of_interest_path, ".", sep = "."))
+  #GeneraPipe:::extract_intr_entities(
+  #  results,
+  #  paths,
+  #  pheno_kegg,
+  #  chip_type,
+  #  annotation)
   
   # Create heatmaps -------------------------------------------------
-  if (kegg_for_heatmap){
-    message("Creating heatmaps for genes of interest.")
-  } else{
-    message(paste("Creating heatmaps for the ", heatmap_list_genes_count, " highest differential expressed genes.", sep = ""))
-  }
-  GeneraPipe:::create_heatmaps(
-    results,
-    pheno_kegg,
-    annotation,
-    project_name,
-    set_ctrl,
-    set_case,
-    heatmap_list_genes_count,
-    kegg_for_heatmap,
-    output_path)
-}
+  #if (kegg_for_heatmap){
+  #  message("Creating heatmaps for genes of interest.")
+  #} else{
+  #  message(paste("Creating heatmaps for the ", heatmap_list_genes_count, " highest differential expressed genes.", sep = ""))
+  #}
+  #GeneraPipe:::create_heatmaps(
+  #  results,
+  #  pheno_kegg,
+  #  annotation,
+  #  project_name,
+  #  set_ctrl,
+  #  set_case,
+  #  heatmap_list_genes_count,
+  #  kegg_for_heatmap,
+  #  output_path)
