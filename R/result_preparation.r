@@ -1,6 +1,7 @@
 result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
   
   topall        = results@topall
+  volc_all      = results@volc_all
   design        = results@design
   eset          = results@eset
   index_case    = results@index_case
@@ -11,15 +12,35 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
   ensembl_genes = annotation@ensembl_genes
   
   #### generic output
-  probe_ids = rownames(topall)
+  #probe_ids = rownames(topall)
   
-  index_probes = match(rownames(topall), rownames(eset), nomatch = 0)
+  #index_probes = match(rownames(topall), rownames(eset), nomatch = 0)
+  #exprs_case = rowMeans(exprs(eset)[index_probes, index_case])
+  #exprs_ctrl = rowMeans(exprs(eset)[index_probes, index_ctrl])
+  
+  #hgnc_genes    = hgnc_genes[index_topall]
+  #hgnc_names    = hgnc_names[index_topall]
+  #ensembl_genes = ensembl_genes[index_topall]
+  
+  #topall_res = data.frame(
+  #  "Probe_ids"           = probe_ids,
+  #  "expr_ctrl"           = round(exprs_ctrl, 2),
+  #  "expr_case"           = round(exprs_case, 2),
+  #  "logFC"               = topall$logFC,
+  #  "P_Value"             = topall$P.Val,
+  #  "HGNC_symb"           = hgnc_genes,
+  #  "HGNC_name"           = stringr::str_replace_all(hgnc_names,",",";")
+  #)
+  #topall_res = topall_res[order(topall_res$logFC, decreasing = TRUE), ]
+  
+  probe_ids = rownames(volc_all)
+  index_probes = match(rownames(volc_all), rownames(eset), nomatch = 0)
   exprs_case = rowMeans(exprs(eset)[index_probes, index_case])
   exprs_ctrl = rowMeans(exprs(eset)[index_probes, index_ctrl])
   
-  hgnc_genes    = hgnc_genes[index_topall]
-  hgnc_names    = hgnc_names[index_topall]
-  ensembl_genes = ensembl_genes[index_topall]
+  hgnc_genes = hgnc_genes[index_probes]
+  hgnc_names = hgnc_names[index_probes]
+  ensembl_genes = ensembl_genes[index_probes]
   
   topall_res = data.frame(
     "Probe_ids"           = probe_ids,
@@ -30,6 +51,7 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
     "HGNC_symb"           = hgnc_genes,
     "HGNC_name"           = stringr::str_replace_all(hgnc_names,",",";")
   )
+  
   topall_res = topall_res[order(topall_res$logFC, decreasing = TRUE), ]
   
   if(FALSE){
