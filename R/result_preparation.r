@@ -38,17 +38,17 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
   exprs_case = rowMeans(exprs(eset)[index_probes, index_case])
   exprs_ctrl = rowMeans(exprs(eset)[index_probes, index_ctrl])
   
-  hgnc_genes = hgnc_genes[index_probes]
-  hgnc_names = hgnc_names[index_probes]
-  ensembl_genes = ensembl_genes[index_probes]
+  hgnc_genes = unlist(hgnc_genes[index_probes])
+  hgnc_names = unlist(hgnc_names[index_probes])
+  ensembl_genes = unlist(ensembl_genes[index_probes])
   
   topall_res = data.frame(
     "Probe_ids"           = probe_ids,
     "expr_ctrl"           = round(exprs_ctrl, 2),
     "expr_case"           = round(exprs_case, 2),
-    "logFC"               = topall$logFC,
-    "P_Value"             = topall$P.Val,
-    "HGNC_symb"           = hgnc_genes,
+    "logFC"               = round(volc_all$logFC,2),
+    "P_Value"             = round(volc_all$adj.P.Val, 4),
+    "HGNC_symb"           = hgnc_genes[index_probes],
     "HGNC_name"           = stringr::str_replace_all(hgnc_names,",",";")
   )
   
