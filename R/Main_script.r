@@ -46,11 +46,11 @@ StartAnalysis = function(
   zipped       = as.logical(project_para$zipped)
   stat_design  = "contrast"
   heatmap_list_genes_count = 40
-  if(! dir.exists(output_path)){
-    dir.create(output_path)
-  }
-  
-  # Set default parameters -----------------------------------------
+  #if(! dir.exists(output_path)){
+  dir.create(output_path)
+ #}
+
+ # Set default parameters -----------------------------------------
   message("Configurating workspace, loading input data.")  
   paths = GeneraPipe:::set_initial_parameters(
     cel_files_path, 
