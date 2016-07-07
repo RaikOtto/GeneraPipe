@@ -26,4 +26,5 @@ Imports: affy,
     hgu133a.db,
     devtools,
     arrayQualityMetrics,
-    pd.huex.1.0.st.v2
+    pd.huex.1.0.st.v2,
+    drosophila2.db
