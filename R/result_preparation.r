@@ -33,13 +33,13 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
   #)
   #topall_res = topall_res[order(topall_res$logFC, decreasing = TRUE), ]
   
-  probe_ids = rownames(volc_all)
+  probe_ids    = rownames(volc_all)
   index_probes = match(rownames(volc_all), rownames(eset), nomatch = 0)
-  exprs_case = rowMeans(exprs(eset)[index_probes, index_case])
-  exprs_ctrl = rowMeans(exprs(eset)[index_probes, index_ctrl])
+  exprs_case   = rowMeans(exprs(eset)[index_probes, index_case])
+  exprs_ctrl   = rowMeans(exprs(eset)[index_probes, index_ctrl])
   
-  hgnc_genes = unlist(hgnc_genes[index_probes])
-  hgnc_names = unlist(hgnc_names[index_probes])
+  hgnc_genes = hgnc_genes[index_probes]
+  hgnc_names = hgnc_names[index_probes]
   ensembl_genes = unlist(ensembl_genes[index_probes])
   
   topall_res = data.frame(
@@ -48,7 +48,7 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
     "expr_case"           = round(exprs_case, 2),
     "logFC"               = round(volc_all$logFC,2),
     "P_Value"             = round(volc_all$adj.P.Val, 4),
-    "HGNC_symb"           = hgnc_genes[index_probes],
+    "HGNC_symb"           = hgnc_genes,
     "HGNC_name"           = stringr::str_replace_all(hgnc_names,",",";")
   )
   

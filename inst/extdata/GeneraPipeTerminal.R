@@ -11,7 +11,7 @@
 # Check if all required packages are installed and can be loaded. If not, install them via Bioconductor or Cran.
 packBioc = c("limma", "KEGG.db", "pathview", "hgu133plus2.db", "affy", "affyPLM",
              "hgu133a.db", "genefilter", "oligo", "biomaRt", "oligoClasses", "Biobase",
-             "pd.huex.1.0.st.v2", "drosophila2.db")
+             "pd.huex.1.0.st.v2", "drosophila2.db", "org.Dm.eg.db")
 packCran = c("gdata", "stringr", "WriteXLS", "dplyr")
 
 indexBioc = which(! packBioc %in% installed.packages())
