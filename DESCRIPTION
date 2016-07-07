@@ -27,4 +27,5 @@ Imports: affy,
     devtools,
     arrayQualityMetrics,
     pd.huex.1.0.st.v2,
-    drosophila2.db
+    drosophila2.db,
+    org.Dm.eg.db

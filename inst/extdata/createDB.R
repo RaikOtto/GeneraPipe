@@ -9,16 +9,16 @@ setwd(package_path)
 defaultDB = src_sqlite("GeneraPipeDefaultDB.sqlite3")
 
 newParameters = data.frame( 
-  ID           = c(), # ID to access your project. Example: "GSE29156", needs to be of class character
-  project_name = c(), # Project name. Example: "GSE29156_test", needs to be of class character
-  chip_type    = c(), # chip type used for experiment. Example: "pd.huex.1.0.st.v2", needs to be of class character
-  cohorts_file = c(), # name of cohort file. Example: "cohorts.tab", needs to be of class character
-  set_ctrl     = c(), # identifier for control cohort in cohort-file. Example: "Normal", needs to be of class character
-  set_case     = c(), # identifier for control cohort in cohort-file. Example: "Tumor", needs to be of class character
-  kegg_file    = c(), # name of kegg pathway file. Example: "pathways.csv", needs to be of class character
-  zipped       = c(),   # are the CEL files zipped? Example: TRUE, needs to be of class logical
-  p_val        = c(),   # p value threshold for diff expression analysis. Example: 0.05, needs to be of class integer
-  lfc_exp      = c()   # log fold change threshold for diff expression analysis. Example: 1, needs to be of class integer
+  ID           = c("GSE21344"), # ID to access your project. Example: "GSE29156", needs to be of class character
+  project_name = c("GSE21344_goldenSpike"), # Project name. Example: "GSE29156_test", needs to be of class character
+  chip_type    = c("drosophila2"), # chip type used for experiment. Example: "pd.huex.1.0.st.v2", needs to be of class character
+  cohorts_file = c("cohorts.tab"), # name of cohort file. Example: "cohorts.tab", needs to be of class character
+  set_ctrl     = c("condition_A"), # identifier for control cohort in cohort-file. Example: "Normal", needs to be of class character
+  set_case     = c("condition_B"), # identifier for control cohort in cohort-file. Example: "Tumor", needs to be of class character
+  kegg_file    = c("kegg_pathways_of_interest.csv"), # name of kegg pathway file. Example: "pathways.csv", needs to be of class character
+  zipped       = c(TRUE),   # are the CEL files zipped? Example: TRUE, needs to be of class logical
+  p_val        = c(0.05),   # p value threshold for diff expression analysis. Example: 0.05, needs to be of class integer
+  lfc_exp      = c(1)   # log fold change threshold for diff expression analysis. Example: 1, needs to be of class integer
 )
 
 db_insert_into( defaultDB$con, table = "projects", values = newParameters)

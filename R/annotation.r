@@ -52,15 +52,15 @@ annotate = function(results, chip_type, phenodata){
     
   } else if (chip_type %in% c("drosophila2")){
     
-    hgnc_genes    = mget(rownames(eset), drosophila2.db::drosophila2SYMBOL);
+    hgnc_genes    = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2SYMBOL))
     hgnc_symbols  = hgnc_genes
-    entrez_genes  = mget(rownames(eset), drosophila2.db::drosophila2ENTREZID); 
-    ensembl_genes = mget(rownames(eset), drosophila2.db::drosophila2ENSEMBL);
-    hgnc_names    = mget(rownames(eset), drosophila2.db::drosophila2GENENAME);
-    uniprot       = mget(rownames(eset), drosophila2.db::drosophila2UNIPROT);
-    pathway       = mget(rownames(eset), drosophila2.db::drosophila2PATH);
-    go            = mget(rownames(eset), drosophila2.db::drosophila2GO);
-    enzyme        = mget(rownames(eset), drosophila2.db::drosophila2ENZYME); 
+    entrez_genes  = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2ENTREZID))
+    ensembl_genes = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2ENSEMBL))
+    hgnc_names    = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2GENENAME))
+    uniprot       = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2UNIPROT))
+    pathway       = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2PATH))
+    go            = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2GO))
+    enzyme        = unlist(BiocGenerics::mget(rownames(eset), drosophila2.db::drosophila2ENZYME))
  
     hgnc_genes[is.na(hgnc_genes)] = ""
     entrez_genes[is.na(entrez_genes)] = ""
