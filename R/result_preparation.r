@@ -47,7 +47,7 @@ result_preparation = function(paths, results, annotation, chip_type, lfc_exp){
     "expr_ctrl"           = round(exprs_ctrl, 2),
     "expr_case"           = round(exprs_case, 2),
     "logFC"               = round(volc_all$logFC,2),
-    "P_Value"             = round(volc_all$adj.P.Val, 4),
+    "P_Value"             = volc_all$adj.P.Val,
     "HGNC_symb"           = hgnc_genes,
     "HGNC_name"           = stringr::str_replace_all(hgnc_names,",",";")
   )
